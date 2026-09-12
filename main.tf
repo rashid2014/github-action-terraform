@@ -9,3 +9,15 @@ resource "random_id" "rand" {
 
 #Deploy an IAM Role with PowerUserIAMPolicy
 #Deploy an RDS Instance
+
+resource "aws_instance" "public_ec2" {
+  ami                    = var.ec2_ami
+  instance_type          = var.instance_type
+  key_name               = var.ec2_key_pair
+  subnet_id              = data.aws_ssm_parameter.resources["subnet1_id"]
+  vpc_security_group_ids = [data.aws_ssm_parameter.resources["ec2_sg_id"]]
+
+  tags = {
+    Name = "Public_EC2"
+  }
+}
