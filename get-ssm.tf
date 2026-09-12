@@ -11,7 +11,7 @@ locals {
 }
 
 data "aws_ssm_parameter" "resources" {
-  for_each = local.ssm_parameter_names
+  for_each = local.ssm_parameters_names
 
   name = each.value
 }
